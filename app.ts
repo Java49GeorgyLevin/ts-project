@@ -1,38 +1,48 @@
-// for(let i = 0; i < 3; i++) {
-//     setTimeout(()=> console.log(i));
-// }
-// let a = 10;
-// console.log(`a = ${a}`)
-//variables
-let hello = "world";
-const vasya = "Vasya";
-const b = 10;
-let c: string;
-c ="10"
-function getRandomNumber(min:number, max:number):number {
-return Math.floor(min + Math.random() * (max -min + 1));
-}
-//HW #30
+const codeA = "a".charCodeAt(0);
+const codeZ = "z".charCodeAt(0);
+
 function shiftCipher(str: string, shift: number = 1): string {
-    //TODO
-    //for each lower case letter (a-z) you should 
-    //perform code ASCII on a given shift (add)
-    //shift should be in cycle of lower case letters
-    // code ASCII 'z' + 2 = code ASCII 'b'
-    //examples:
-    //shiftCipher("abz.", 3) => "dec."
-    return "";
+    let strOut: string = "";
+    shift %= (codeZ - codeA + 1);
+    for(let i = 0; i < str.length; i++) {
+        let cc = str.charCodeAt(i);
+        if(cc < codeA || cc > codeZ) {
+            strOut += str[i];
+        } else {
+            cc += shift;
+            if(cc > codeZ) {
+                cc -= codeZ;
+                cc += codeA - 1;
+            }
+            strOut += String.fromCharCode(cc);
+        }
+    }
+    return strOut;
 }
 function shiftDecipher(str: string, shift: number = 1): string {
-    //TODO
-    //for each lower case letter (a-z) you should 
-    //perform code ASCII on a given shift (subtract)
-    //shift should be in cycle of lower case letters
-    // code ASCII 'z' - 2 = code ASCII 'x'
-    //examples:
-    //shiftCipher("dec.", 3) => "abz."
-    return "";
+    let strOut: string = "";
+    shift %= (codeZ - codeA + 1);
+    for(let i = 0; i < str.length; i++) {
+        let cc = str.charCodeAt(i);
+        if(cc < codeA || cc > codeZ) {
+            strOut += str[i];
+        } else {
+            cc -= shift;
+            if(cc < codeA) {
+                cc += codeZ + 1;
+                cc -= codeA;
+            }
+            strOut += String.fromCharCode(cc);
+        }
+    }
+    return strOut;
 }
 
-
-
+let testString: string = "abz";
+let shift: number = 27;
+console.log(shiftCipher(testString, shift));
+console.log(shiftDecipher("bca", 27));
+testString = "abz";
+shift = 1000;
+console.log(shiftCipher(testString, shift));
+console.log(shiftDecipher("mnl", 1000));
