@@ -1,42 +1,10 @@
-const codeA = "a".charCodeAt(0);
-const codeZ = "z".charCodeAt(0);
-const aZ = codeZ - codeA + 1;
+import { CipherDecifer } from "./CipherDecipher";
 
-function shiftCipher(str: string, shift: number = 1): string {
-    shift %= aZ;
-    return shiftDeshift(str,shift);
-}
+const minAscii: number = ' '.charCodeAt(0);
+const maxAscii: number = '~'.charCodeAt(0);
+const shift: number = 120;
 
-function shiftDecipher(str: string, shift: number = 1): string {
-    shift %= aZ;
-    shift = -shift;
-    return shiftDeshift(str,shift);
-}
-
-function shiftDeshift(str: string, shift: number = 1): string {
-    let strOut: string = "";
-    for(let i = 0; i < str.length; i++) {
-        let cc = str.charCodeAt(i);
-        if(cc < codeA || cc > codeZ) {
-            strOut += str[i];
-        } else {
-            cc += shift;
-            if(cc > codeZ) {
-                cc -= aZ;
-            } else if(cc < codeA) {
-                cc += aZ;
-            }
-            strOut += String.fromCharCode(cc);
-        }
-    }
-    return strOut;
-}
-
-let testString: string = "Z9abz";
-let shift: number = 27;
-console.log(shiftCipher(testString, shift));
-console.log(shiftDecipher("Z9bca", 27));
-testString = "Z9abz";
-shift = 1000;
-console.log(shiftCipher(testString, shift));
-console.log(shiftDecipher("Z9mnl", 1000));
+const cipherDecipher: CipherDecifer = new CipherDecifer(minAscii, maxAscii, shift);
+console.log(cipherDecipher.shiftCipher("abc"));
+console.log(cipherDecipher.shiftDecipher("z{|"));
+console.log('a'.charCodeAt(0));
