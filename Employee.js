@@ -30,6 +30,7 @@ class Employee {
         if (salary < exports.MIN_SALARY || salary > exports.MAX_SALARY) {
             throw `salary mast be in range [${exports.MIN_SALARY}-${exports.MAX_SALARY}]`;
         }
+        this._basicSalary = salary;
     }
 }
 exports.Employee = Employee;

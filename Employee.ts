@@ -9,7 +9,7 @@ export abstract class Employee {
                 throw `salary mast be in range [${MIN_SALARY}-${MAX_SALARY}]`
                }
          }
-          get id() {
+         get id() {
             return this._id;
          }
          get name() {
@@ -18,7 +18,6 @@ export abstract class Employee {
          get birthYear() {
             return this._birthYear;
          }
-         
          get basicSalary() {
             return this._basicSalary
          }
@@ -26,11 +25,9 @@ export abstract class Employee {
            if (salary < MIN_SALARY || salary > MAX_SALARY) {
             throw `salary mast be in range [${MIN_SALARY}-${MAX_SALARY}]`
            }
+           this._basicSalary = salary;
          }
-        abstract  computeSalary(): number;
-         
-
-
+        abstract  computeSalary(): number;     
 
 }
 
