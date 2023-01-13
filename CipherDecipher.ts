@@ -1,3 +1,5 @@
+type MapperFun = (symb: string) => string;
+
 export class CipherDecifer {
     nCodes: number;
     constructor(private minCode: number, private maxCode: number, private shift: number){
@@ -10,7 +12,7 @@ export class CipherDecifer {
         return this.cipherDecipher(str, this.mapperDecipher.bind(this));
     }
     private cipherDecipher(str: string,
-     mapperFun: (symb: string) => string): string {
+     mapperFun: MapperFun): string {
         const arStr: Array<string> = Array.from(str);
         const arRes: Array<string> = arStr.map(symb => {
             let res: string = symb;
