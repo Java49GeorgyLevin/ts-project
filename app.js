@@ -1,7 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const WageEmployee_1 = require("./WageEmployee");
-const employee = new WageEmployee_1.WageEmployee(123, "Vasya", 2000, "QA", 10000, 100, 50);
-console.log(employee.id);
-employee.basicSalary = 60000;
+const SalesePerson_1 = require("./SalesePerson");
+const Company_1 = require("./Company");
+const wEmpl1 = new WageEmployee_1.WageEmployee(123, "Vasya", 2000, "QA", 10000, 100, 50);
+const wEmpl2 = new WageEmployee_1.WageEmployee(234, "Petya", 2001, "FullStack", 12000, 200, 100);
+const sEmpl1 = new SalesePerson_1.SalesePerson(1234, "Asya", 2000, "QA", 10000, 100, 50, 100, 10);
+const sEmpl2 = new SalesePerson_1.SalesePerson(2345, "Etya", 2001, "FullStack", 12000, 200, 100, 200, 20);
+const company = new Company_1.Company([]);
+company.addEmployee(wEmpl1);
+company.addEmployee(wEmpl2);
+company.addEmployee(sEmpl1);
+company.addEmployee(sEmpl2);
+console.log(company);
+console.log(company.getEmployee(2345));
+console.log(company.getEmployeeBySalary(9000, 11000));
+company.removeEmployee(1234);
+console.log(company);
+const budget = company.computeBudget();
+console.log(budget);
 //# sourceMappingURL=app.js.map

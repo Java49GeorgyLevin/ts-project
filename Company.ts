@@ -12,11 +12,14 @@ export class Company {
         }
     }
     removeEmployee(id : number) : boolean {
-        const unqeEmployees : Array<Employee> = this._arEmployees.filter((empl : Employee) => !empl.id);
-        return unqeEmployees.length == this._arEmployees.length ? false : true;
+        const uniqeEmployees : Array<Employee> = this._arEmployees.filter((empl : Employee) => empl.id !== id);
+        const change : boolean = uniqeEmployees.length == this._arEmployees.length ? false : true;
+        this._arEmployees = uniqeEmployees;
+        return change;
+
     }
     getEmployee(id : number) : Employee | null {
-        const employee : Employee = this._arEmployees.filter((empl : Employee) => empl.id)[0];
+        const employee : Employee = this._arEmployees.filter((empl : Employee) => empl.id === id)[0];
         return employee !== null ? employee : null;
     }
     getEmployeeBySalary(salaryFrom : number, salaryTo : number = salaryFrom) : Array<Employee> {

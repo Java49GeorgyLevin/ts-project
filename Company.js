@@ -5,30 +5,29 @@ class Company {
     constructor(_arEmployees) {
         this._arEmployees = _arEmployees;
     }
-    ;
     addEmployee(employee) {
-        if (!this._arEmployees.some(empl => employee.id === empl.id)) {
+        if (!this._arEmployees.some((empl) => employee.id === empl.id)) {
             this._arEmployees.push(employee);
         }
     }
     removeEmployee(id) {
-        const unqeEmployees = this._arEmployees.filter(empl => !empl.id);
-        return unqeEmployees.length == this._arEmployees.length ? false : true;
+        const uniqeEmployees = this._arEmployees.filter((empl) => empl.id !== id);
+        const change = uniqeEmployees.length == this._arEmployees.length ? false : true;
+        this._arEmployees = uniqeEmployees;
+        return change;
     }
     getEmployee(id) {
-        const employee = this._arEmployees.filter(empl => empl.id)[0];
+        const employee = this._arEmployees.filter((empl) => empl.id === id)[0];
         return employee !== null ? employee : null;
     }
     getEmployeeBySalary(salaryFrom, salaryTo = salaryFrom) {
-        const employees = this._arEmployees.filter(empl => empl.basicSalary >= salaryFrom &&
+        const employees = this._arEmployees.filter((empl) => empl.basicSalary >= salaryFrom &&
             empl.basicSalary <= salaryTo);
         return employees.sort((a, b) => b.birthYear - a.birthYear);
     }
     computeBudget() {
-        // let budget : number = 0;
         const employees = this._arEmployees;
-        return employees.reduce((res, empl) => res + empl.basicSalary, 0);
-        // return budget;
+        return employees.reduce((res, empl) => res + empl.computeSalary(), 0);
     }
 }
 exports.Company = Company;
